@@ -11,8 +11,33 @@ export class ApiserviceService {
 
   constructor(private http: HttpClient) { }
 
-  // Department
-  getDepartmentList(): Observable<any[]> {
+  // Employee
+  getEmployeeList(): Observable<any[]> {
+    const data = this.http.get<any[]>(this.apiUrl + 'employee/GetEmployee');
+    return data;
+  }
+
+  addEmployee(emp: any): Observable<any> {
+    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    return this.http.post<any>(this.apiUrl + 'employee/AddEmployee', emp, httpOptions);
+  }
+
+  updateEmployee(emp: any): Observable<any> {
+    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    return this.http.put<any>(this.apiUrl + 'employee/UpdateEmployee/', emp, httpOptions);
+  }
+
+  deleteEmployee(empId: number): Observable<number> {
+    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    return this.http.delete<number>(this.apiUrl + 'employee/DeleteEmployee/' + empId, httpOptions);
+  }
+
+  uploadPhoto(photo: any) {
+    return this.http.post(this.apiUrl + 'employee/savefile', photo);
+  }
+
+   // Department
+   getDepartmentList(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl + 'department/GetDepartment');
   }
 
@@ -33,34 +58,6 @@ export class ApiserviceService {
 
   getAllDepartmentNames(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl + 'employee/GetAllDepartmentNames');
-  }
-
-  // Employee
-  getEmployeeList(): Observable<any[]> {
-    const data = this.http.get<any[]>(this.apiUrl + 'employee/GetEmployee');
-    return data;
-  }
-
-  addEmployee(emp: any): Observable<any> {
-    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-
-    console.log(emp);
-
-    return this.http.post<any>(this.apiUrl + 'employee/AddEmployee', emp, httpOptions);
-  }
-
-  updateEmployee(emp: any): Observable<any> {
-    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.put<any>(this.apiUrl + 'employee/UpdateEmployee/', emp, httpOptions);
-  }
-
-  deleteEmployee(empId: number): Observable<number> {
-    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.delete<number>(this.apiUrl + 'employee/DeleteEmployee/' + empId, httpOptions);
-  }
-
-  uploadPhoto(photo: any) {
-    return this.http.post(this.apiUrl + 'employee/savefile', photo);
   }
 
 }

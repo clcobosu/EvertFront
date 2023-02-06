@@ -10,51 +10,42 @@ export class AddEditEmployeeComponent implements OnInit {
 
   constructor(private service: ApiserviceService) { }
   @Input() emp: any;
-  EmployeeId = "";
+  EmployeeId: number= 0;
   EmployeeName = "";
   EmployeeLastName = "";
-  Department = "";
-  EstadoCivil = "";
-  DateOfJoining = "";
-  DateOfBird = "";
-  Brothers = "";
-  PhotoFileName = "";
-  PhotoFilePath = "";
-  DepartmentList: any = [];
+  Department ="";
+  EstadoCivil: number = 0;
+  DateOfBird : string= '';
+  Brothers !: boolean;
+  PhotoFileName : string = '';
+  PhotoFilePath: string = '';
+  DepartmentList:any=[];
   xEstadoCivil: any = [];
 
 
   ngOnInit(): void {
-    this.loadEmployeeList();
+
   }
 
-  selectedTeam = '';
+  selectedTeam !:number ;
 
 	onSelected(value:string): void {
-		this.selectedTeam = value;
+
+    if(value==='Casado')
+      this.selectedTeam=1;
+    else
+      this.selectedTeam=0;
 	}
 
-  selectHermano='';
+  selectHermano!:boolean;
 
   onRadioChange(value: string) {
-    this.selectHermano = value;
-    console.log(this.selectHermano);
-
+    if(value==='true')
+      this.selectHermano= true;
+    else
+      this.selectHermano=false;
  }
 
-loadEmployeeList() {
-
-    // this.service.t().subscribe((data: any) => {
-
-    //   this.EmployeeId = this.emp.EmployeeId;
-    //   this.EmployeeName = this.emp.EmployeeName;
-    //   this.Department = this.emp.Department;
-    //   this.DateOfJoining = this.emp.DateOfJoining;
-    //   this.PhotoFileName = this.emp.PhotoFileName;
-    //   this.PhotoFilePath = this.service.photoUrl + this.PhotoFileName;
-    // });
-
-  }
 
   addEmployee() {
     var val = {
@@ -63,10 +54,9 @@ loadEmployeeList() {
       EmployeeLastName: this.EmployeeLastName,
       EstadoCivil: this.selectedTeam,
       DateOfBird: this.DateOfBird,
+      Brothers: this.selectHermano,
       PhotoFileName: this.PhotoFileName
     };
-
-   console.log(val);
 
     this.service.addEmployee(val).subscribe(res => {
       alert(res.toString());

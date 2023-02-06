@@ -20,10 +20,10 @@
     <div class="input-group mb-3">
       <span class="input-group-text">Hermanos </span>
       <label class="radio-inline">
-        <input type="radio" #xHermano name="optradio"  (change)="onRadioChange(xHermano.value)">Si
+        <input type="radio" #xHermano name="optradio" value="true" (change)="onRadioChange(xHermano.value)">Si
       </label>
       <label class="radio-inline">
-        <input type="radio" #xHermano name="optradio"  checked (change)="onRadioChange(xHermano.value)">No
+        <input type="radio" #xHermano name="optradio" value="false" (change)="onRadioChange(xHermano.value)">No
       </label>
     </div>
     <div class="input-group mb-3">
