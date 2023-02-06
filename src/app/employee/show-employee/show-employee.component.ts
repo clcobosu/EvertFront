@@ -56,7 +56,6 @@ export class ShowEmployeeComponent implements OnInit {
   refreshEmpList() {
     this.service.getEmployeeList().subscribe(data => {
       this.EmployeeList = data;
-      console.log(this.EmployeeList);
     });
   }
 }

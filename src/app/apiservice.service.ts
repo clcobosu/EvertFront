@@ -29,7 +29,7 @@ export class ApiserviceService {
 
   deleteEmployee(empId: number): Observable<number> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.delete<number>(this.apiUrl + 'employee/DeleteEmployee/' + empId, httpOptions);
+    return this.http.delete<number>(this.apiUrl + 'employee/' + empId, httpOptions);
   }
 
   uploadPhoto(photo: any) {

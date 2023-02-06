@@ -9,6 +9,7 @@ import { ApiserviceService } from 'src/app/apiservice.service';
 export class AddEditEmployeeComponent implements OnInit {
 
   constructor(private service: ApiserviceService) { }
+
   @Input() emp: any;
   EmployeeId: number= 0;
   EmployeeName = "";
@@ -19,11 +20,22 @@ export class AddEditEmployeeComponent implements OnInit {
   Brothers !: boolean;
   PhotoFileName : string = '';
   PhotoFilePath: string = '';
-  DepartmentList:any=[];
+  DepartmentList:any= [];
   xEstadoCivil: any = [];
 
 
+
   ngOnInit(): void {
+    this.cargarDatos();
+  }
+
+  cargarDatos(){
+
+    var fetchedObject = JSON.parse(JSON.stringify(this.emp));
+    this.EmployeeName = fetchedObject.EmployeeName.toString();
+    this.EmployeeLastName = fetchedObject.EmployeeLastName.toString();
+    this.EstadoCivil = fetchedObject.EstadoCivil.toString();
+    this.DateOfBird = fetchedObject.DateOfBird.toString();
 
   }
 
@@ -71,12 +83,17 @@ export class AddEditEmployeeComponent implements OnInit {
       EmployeeLastName: this.EmployeeLastName,
       EstadoCivil: this.selectedTeam,
       DateOfBird: this.DateOfBird,
+      Brothers: this.selectHermano,
       PhotoFileName: this.PhotoFileName
     };
 
+    let msg = '';
+
     this.service.updateEmployee(val).subscribe(res => {
-      alert(res.toString());
+     msg=res;
     });
+
+    alert(msg.toString());
   }
 
 

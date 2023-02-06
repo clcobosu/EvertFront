@@ -1,3 +1,4 @@
+
 <div class="d-flex flex-row bd-highlight mb-3">
   <div class="p-2 w-50 bd-highlight">
     <div class="input-group mb-3">
@@ -26,11 +27,12 @@
         <input type="radio" #xHermano name="optradio" value="false" (change)="onRadioChange(xHermano.value)">No
       </label>
     </div>
-    <div class="input-group mb-3">
+    <div class="input-group mb-3" id="DateOfBird">
       <span class="input-group-text">Fecha de Nacimiento</span>
       <input type="date" class="form-control" [(ngModel)]="DateOfBird">
     </div>
   </div>
+
   <div class="p-2 w-50 bd-highlight">
     <img width="250px" height="250px" [src]="PhotoFilePath" />
     <input class="m-2" type="file" (change)="uploadPhoto($event)">
